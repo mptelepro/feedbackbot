@@ -52,3 +52,17 @@ async def start(c, m):
                            disable_web_page_preview=True,
                            reply_to_message_id=m.message_id,
                            reply_markup=markup)
+
+
+@feedback.on_message(filters.command("dice") & (filters.chat(f'{CHATSTOWORK}') | filters.user(f"{OWNERID}")))
+async def throwdice(client, message):
+    diceoutput = random.randrange(1,6)
+    await message.reply_text(f"**Results ==>> {diceoutput}**",True)
+    
+@feedback.on_message(filters.command("help") & (filters.chat(f'{CHATSTOWORK}') | filters.user(f"{OWNERID}")))
+async def helpcmd(client, message):
+    await message.reply_text(f"**Below are The Avaliable Commands**\n\n"
+                             "-`/dice`- Throw a Dice and Give Output\n"
+                             "-`/Jokes`- Gives Programming Jokes\n"
+                             "-`/decide`- Send Yes or No, etc Option..\n"
+                             "-`/quote`- send a Quote of Stephen Hawking",True)
